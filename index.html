@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Stream Deck Enhanced</title>
+  <style>
+    body {
+      background: #001f1f;
+      margin: 0;
+      font-family: sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 40px;
+      justify-items: center;
+      align-items: center;
+      height: 100vh;
+      padding: 60px;
+      box-sizing: border-box;
+    }
+
+    .button {
+      width: 220px;
+      height: 220px;
+      border-radius: 60px;
+      background-color: #ff6600;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 16px;
+      text-align: center;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+      overflow: hidden;
+      pointer-events: auto;
+      position: relative;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 40px;
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+    }
+
+    #popup {
+      display: none;
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px black;
+      z-index: 999;
+      width: 300px;
+    }
+
+    #popup input,
+    #popup button {
+      margin: 5px 0;
+      width: 100%;
+      padding: 6px;
+      font-size: 14px;
+    }
+
+    #popup .actions {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    #next-btn,
+    #prev-btn {
+      display: none !important;
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    .titlebar,
+    .window-header {
+      display: none !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grid" id="button-grid"></div>
+
+  <div class="toolbar">
+    <button id="menu-btn" style="
+      position: fixed;
+      bottom: 20px;
+      left: 0;
+      width: 30px;
+      height: 60px;
+      background-color: #444;
+      color: white;
+      border: none;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      z-index: 1000;
+    ">&#9776;</button>
+
+    <div>
+      <button id="prev-btn">←</button>
+      <button id="next-btn">→</button>
+    </div>
+  </div>
+
+  <div id="popup">
+    <form id="edit-form">
+      <input type="text" id="label" placeholder="Label" required />
+      <input type="text" id="path" placeholder="Executable Path or Command" required />
+      <input type="text" id="icon" placeholder="Icon Path (e.g. images/icon.png)" />
+      <div class="actions">
+        <button type="submit">Save</button>
+        <button type="button" id="delete-btn" style="background-color: darkred; color: white;">Delete</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "name": "stream-deck-enhanced-portable",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win portable"
+  },
+  "build": {
+    "appId": "com.gizmonic.streamdeck",
+    "productName": "StreamDeck Enhanced",
+    "files": [
+      "**/*"
+    ],
+    "directories": {
+      "buildResources": "images"
+    },
+    "win": {
+      "target": "portable"
+    },
+    "asar": false
+  },
+  "devDependencies": {
+    "electron": "^26.2.1",
+    "electron-builder": "^26.0.12"
+  },
+  "dependencies": {
+    "auto-launch": "^5.0.6",
+    "fs-extra": "^11.1.1"
+  }
+}

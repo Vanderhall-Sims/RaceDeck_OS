@@ -1,0 +1,72 @@
+[
+  {
+    "label": "Dirt Rally 2.0",
+    "path": "C:\\Users\\VHsim\\Desktop\\DiRT Rally 2.0.url",
+    "icon": "images/craiyon_154117_image3.png"
+  },
+  {
+    "label": "1",
+    "path": "C:\\Users\\VHsim\\Desktop\\Microsoft Flight Simulator.lnk",
+    "icon": "images/craiyon_154117_image4.png"
+  },
+  {
+    "label": "1",
+    "path": "1",
+    "icon": "images/craiyon_154117_image1.png"
+  },
+  {
+    "label": "1",
+    "path": "1",
+    "icon": "images/craiyon_154117_image5.png"
+  },
+  {
+    "label": "1",
+    "path": "1",
+    "icon": "images/craiyon_154117_image6.png"
+  },
+  {
+    "label": "1",
+    "path": "1",
+    "icon": "images/craiyon_154117_image2.png"
+  },
+  {
+    "label": "1",
+    "path": "1",
+    "icon": "images/craiyon_154117_image3.png"
+  },
+  {
+    "label": "1",
+    "path": "1",
+    "icon": ""
+  },
+  {
+    "label": "1",
+    "path": "1",
+    "icon": "1"
+  },
+  {
+    "label": "12",
+    "path": "1",
+    "icon": ""
+  },
+  {
+    "label": "RESTART PC",
+    "path": "shutdown /r /t 0",
+    "icon": ""
+  },
+  {
+    "label": "1",
+    "path": "1",
+    "icon": ""
+  },
+  {
+    "label": "1",
+    "path": "1",
+    "icon": ""
+  },
+  {
+    "label": "\ud83c\udf99 Voice",
+    "path": "voice_command_trigger",
+    "icon": "images/voice control off.png"
+  }
+]
