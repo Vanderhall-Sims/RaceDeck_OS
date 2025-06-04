@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const os = require('os');
 const { exec } = require('child_process');
+const { ipcRenderer } = require('electron');
 
 window.onload = () => {
   const buttonGrid = document.getElementById("button-grid");
@@ -18,8 +18,8 @@ window.onload = () => {
   let editIndex = null;
   let voiceAccessActive = false;
 
-  const appDataPath = process.env.APPDATA || path.join(os.homedir(), 'AppData', 'Roaming');
-  const configDir = path.dirname(process.execPath);
+  const userDataPath = ipcRenderer.sendSync('get-user-data-path');
+  const configDir = path.join(userDataPath, 'stream-deck-enhanced');
   const configPath = path.join(configDir, 'buttons.json');
   const colorConfigPath = path.join(configDir, 'background.json');
 
@@ -85,7 +85,10 @@ window.onload = () => {
       div.className = "button";
 
       if (btn.icon && btn.icon.trim()) {
-        const iconPath = path.join(__dirname, btn.icon);
+        let iconPath = path.join(configDir, btn.icon);
+        if (!fs.existsSync(iconPath)) {
+          iconPath = path.join(__dirname, btn.icon);
+        }
         div.style.backgroundImage = `url("file:///${iconPath.replace(/\\/g, "/")}")`;
       } else {
         div.textContent = btn.label;
@@ -141,8 +144,8 @@ window.onload = () => {
 
         const file = e.dataTransfer.files[0];
         if (file && /\.(png|jpe?g)$/i.test(file.name)) {
-          const imagesFolder = path.join(__dirname, "images");
-          if (!fs.existsSync(imagesFolder)) fs.mkdirSync(imagesFolder);
+          const imagesFolder = path.join(configDir, "images");
+          if (!fs.existsSync(imagesFolder)) fs.mkdirSync(imagesFolder, { recursive: true });
 
           const safeName = file.name.replace(/[^a-z0-9_.-]/gi, "_");
           const destPath = path.join(imagesFolder, safeName);
@@ -245,7 +248,9 @@ window.onload = () => {
 
       const originalPath = file.path;
       const fileName = path.basename(originalPath);
-      const targetPath = path.join(__dirname, 'images', fileName);
+      const imagesFolder = path.join(configDir, 'images');
+      if (!fs.existsSync(imagesFolder)) fs.mkdirSync(imagesFolder, { recursive: true });
+      const targetPath = path.join(imagesFolder, fileName);
 
       try {
         fs.copyFileSync(originalPath, targetPath);
