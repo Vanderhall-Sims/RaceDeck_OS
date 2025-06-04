@@ -1,4 +1,4 @@
-const { app, BrowserWindow, screen } = require('electron');
+const { app, BrowserWindow, screen, ipcMain } = require('electron');
 const AutoLaunch = require('auto-launch');
 
 const appLauncher = new AutoLaunch({
@@ -6,6 +6,11 @@ const appLauncher = new AutoLaunch({
   path: app.getPath('exe'),
 });
 appLauncher.enable().catch(err => console.error("Auto-launch error:", err));
+
+// Expose the userData path to renderer processes
+ipcMain.on('get-user-data-path', (event) => {
+  event.returnValue = app.getPath('userData');
+});
 
 function createWindow() {
   const displays = screen.getAllDisplays();
